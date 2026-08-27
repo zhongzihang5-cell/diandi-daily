@@ -175,16 +175,6 @@ footer{border-top:1px solid var(--line);padding:16px 0 40px;color:var(--mute);fo
   <div class="note">快捷 100% 是纯记录；提问几乎只发生在文字（主）和语音里，语音提问占比更高、更「对话化」。</div>
  </div>
 
- <div class="kicker">维度六 · 机会点</div><h2>最大的缺口：用户提问，多数仍没被正确回答</h2>
- <div class="card">
-  <div class="sub">112 条提问的实际回应结果</div>
-  <div class="gapbar"><div class="gseg" style="width:92%;background:#ef2f6b">92% 未正确回应</div><div class="gseg" style="width:8%;background:#12a56b">8% 已答上</div></div><div class="legend" style="margin-top:8px"><span class="lg"><i style="background:#ef2f6b"></i>未正确回应 103</span><span class="lg"><i style="background:#12a56b"></i>已正确回应 9</span></div>
-  <div class="callout" style="margin-top:12px"><b>相比 8/25 的「0 条被答上」，8/26 已有 9 条提问拿到正确答案</b>（如「下次姨妈几号」开始返回预估日期）。但 103/112（92%）仍是兜底或无响应——按「记录」逻辑接住了「提问」意图，是当前投入产出比最高的优化点。</div>
-  <div class="excard" style="--c:#12a56b;margin-top:12px"><div class="ex-h">已答上 · 预测类开始生效</div><div class="ex-q">"下一次来大姨妈是几号"</div><div class="ex-d">系统答："结合你之前的经期记录，帮你预估下次经期大概在本月20号左右，多留意身体的小变化~"——真正给出了日期，而非"没法直接给出"。</div></div>
-  <div class="excard" style="--c:#3b6fe0"><div class="ex-h">未答上 · 正常性判断 · 要的是安心</div><div class="ex-q">"我现在左下小腹有一点点疼是正常的吗"　"综合几次来看，我健康不"</div><div class="ex-d">本质是求 reassurance，系统无响应。这类既没解答也没安抚。</div></div>
-  <div class="note">补充：自由输入里 221/477（46%） 的文字没有任何 AI 回复。需先分清哪些是「纯记录本就不需要回应」，哪些是「该回没回」——后者是体验漏点。</div>
- </div>
-
  <div class="kicker">入口切片 · 月经横幅人群</div><h2>从横幅进来的人，是「带着问题」来的</h2>
  <div class="grid g3">
   <div class="kpi"><div class="k">横幅人群提问率</div><div class="v num hl">35.6<small>%</small></div><span class="delta up">其余仅 5.1%</span></div>
@@ -207,7 +197,7 @@ footer{border-top:1px solid var(--line);padding:16px 0 40px;color:var(--mute);fo
  <div class="kicker">每日趋势</div><h2>留存用户与比例，是否在往上走</h2>
  <div class="grid g2" id="charts2_826"></div>
  <div class="note">随灰度放量，留存/连续记录用户数与留存比例均稳步抬升——留存比例从 3.6% 升到 7.5%。</div>
- <div class="note" style="background:var(--ph);border-radius:8px;padding:9px 12px"><b>口径 · 留存比例（累计）＝</b> 截至当日「有记录自然日 ≥2 天」的用户数 ÷ 截至当日累计记录用户数（分子分母均为从灰度首日累计到当日、去重）。8/26 即 38 ÷ 504 ＝ 7.5%。它衡量的是"灰度至今整体有多大比例的人跨天回来记过"，随样本累积变化，与「数据总览」里按单日计算的"次日留存率"不是同一指标。</div>
+ <div class="note" style="background:var(--ph);border-radius:8px;padding:9px 12px"><b>口径 · 复记比例（累计）＝</b> 截至当日「有记录自然日 ≥2 天」的用户数 ÷ 截至当日累计记录用户数（分子分母均为从灰度首日累计到当日、去重）。8/26 即 38 ÷ 504 ＝ 7.5%。它衡量的是"灰度至今整体有多大比例的人跨天回来记过"，随样本累积变化，与「数据总览」里按单日计算的"次日留存率"不是同一指标。</div>
 
  <div class="kicker">跨天留存盘点</div><h2>留存口径 · ≥2 个自然日有记录</h2>
  <div class="grid g3" style="margin-top:12px">
@@ -292,16 +282,6 @@ footer{border-top:1px solid var(--line);padding:16px 0 40px;color:var(--mute);fo
   <div class="note">快捷 100% 是纯记录；提问几乎只发生在文字（主）和语音里，语音提问占比更高、更「对话化」。</div>
  </div>
 
- <div class="kicker">维度六 · 机会点</div><h2>最大的缺口：用户提问，系统没有正确回答</h2>
- <div class="card">
-  <div class="sub">93 条提问的实际回应结果</div>
-  <div class="gapbar"><div class="gseg" style="width:100%;background:#ef2f6b">100% 未正确回应</div></div><div class="legend" style="margin-top:8px"><span class="lg"><i style="background:#ef2f6b"></i>未正确回应 93</span></div>
-  <div class="callout" style="margin-top:12px"><b>所有提问都没有拿到正确答案。</b>用户问「下次姨妈几号」，系统答「我帮你记下啦」或「多留意身体状态」；即使系统返回了内容，只要没有真正回答问题，也统一视为未正确回应。这是心智错位的直接代价——按「记录」逻辑接住了「提问」意图，是当前投入产出比最高的优化点。</div>
-  <div class="excard" style="--c:#3b6fe0;margin-top:12px"><div class="ex-h">预测类 · 反复追问</div><div class="ex-q">同一用户连问三遍：“下次姨妈是几号？”“下一次姨妈是几号？”“下次姨妈来几号？”</div><div class="ex-d">系统三次都答「现在没法直接给出具体日期」。用户其实一直没到想要的，只是换法子再问。</div></div>
-  <div class="excard" style="--c:#3b6fe0"><div class="ex-h">正常性判断 · 要的是安心</div><div class="ex-q">“月经量正常吗？”“我这个经期正常吗？”“月经准吗？”</div><div class="ex-d">本质是求 reassurance，不是求知识。一句「因人而异，多留意」既没解答也没安抚。</div></div>
-  <div class="note">补充：自由输入里 153/392（39%） 的文字没有任何 AI 回复。需先分清哪些是「纯记录本就不需要回应」，哪些是「该回没回」——后者是体验漏点。</div>
- </div>
-
  <div class="kicker">会话视角 · 单条之外</div><h2>连发多条时，暴露的是「任务」</h2>
  <div class="card"><div class="sub">灰度期人均 1.6 条 · 单人单日 ≥3 条连发：44 批 · 171 条（约 26%）</div>
   <div class="excard" style="--c:#ef2f6b"><div class="ex-h">编辑受挫 · 连续追问</div><div class="ex-q">uid 639989116（2026-08-24，4条语音）：“打错了这个。” → “这个怎么删掉这个怎么删掉？” → “这个怎么赶一赶吗？” → “改不了嘛改你。”</div><div class="ex-d">用户先明确表示记录有误，随后连续追问删除和修改方法。系统虽提示进入记录卡片寻找删除按钮，但没有稳定识别后续语音意图，用户最终仍反馈“改不了”。</div></div>
@@ -324,7 +304,7 @@ footer{border-top:1px solid var(--line);padding:16px 0 40px;color:var(--mute);fo
  <div class="kicker">每日趋势</div><h2>留存用户与比例，是否在往上走</h2>
  <div class="grid g2" id="charts2_825"></div>
  <div class="note">随灰度放量，留存/连续记录用户数与留存比例均稳步抬升——留存比例从 3.6% 升到 6.4%。</div>
- <div class="note" style="background:var(--ph);border-radius:8px;padding:9px 12px"><b>口径 · 留存比例（累计）＝</b> 截至当日「有记录自然日 ≥2 天」的用户数 ÷ 截至当日累计记录用户数（分子分母均为从灰度首日累计到当日、去重）。它衡量的是"灰度至今整体有多大比例的人跨天回来记过"，随样本累积变化，与「数据总览」里按单日计算的"次日留存率"不是同一指标。</div>
+ <div class="note" style="background:var(--ph);border-radius:8px;padding:9px 12px"><b>口径 · 复记比例（累计）＝</b> 截至当日「有记录自然日 ≥2 天」的用户数 ÷ 截至当日累计记录用户数（分子分母均为从灰度首日累计到当日、去重）。它衡量的是"灰度至今整体有多大比例的人跨天回来记过"，随样本累积变化，与「数据总览」里按单日计算的"次日留存率"不是同一指标。</div>
 
  <div class="kicker">跨天留存盘点</div><h2>留存口径 · ≥2 个自然日有记录</h2>
  <div class="grid g3" style="margin-top:12px">

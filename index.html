@@ -1,5 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>点滴 8.25 日报</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>点滴 8.26 日报</title>
+<meta property="og:title" content="点滴 8.26 日报">
+<meta name="description" content="美柚 · 点滴 8.26 日报">
 <style>
 :root{--ink:#1b1c2e;--ink2:#3a3b52;--mute:#7a7b8e;--line:#ece9f1;--paper:#faf9fc;--card:#fff;
 --rose:#ef2f6b;--rose-soft:#fde5ee;--rose-ink:#b5124a;--blue:#3b6fe0;--amber:#e0891f;--violet:#8656e6;
@@ -454,7 +456,7 @@ function activateTab(t){
 }
 function showDate(dt){
  document.querySelectorAll('.report').forEach(function(r){r.classList.toggle('on', r.dataset.date===dt);});
- document.getElementById('h1title').textContent=META[dt]||('点滴 '+dt+' 日报');
+ var _t=META[dt]||('点滴 '+dt+' 日报');document.getElementById('h1title').textContent=_t;document.title=_t;var og=document.querySelector('meta[property="og:title"]');if(og)og.setAttribute('content',_t);
  document.querySelectorAll('.dateitem').forEach(function(b){b.classList.toggle('cur', b.dataset.date===dt);});
  activateTab('0');
 }

@@ -2031,16 +2031,9 @@ function initRectype(elid,RT){
     return '<div class="bar"><span class="lb">'+c+'</span><span class="track"><span class="fill" style="width:'+(users?v/users*100:0)+'%;background:'+cols[k]+'"></span></span><span class="vv">'+pct.toFixed(2)+'%</span></div>';}).join('');
   el.innerHTML='<div class="rt-left"><svg class="chart" viewBox="0 0 '+W+' '+H+'">'+g+'</svg><div class="rt-hint">点选柱体查看当日构成</div></div>'+
    '<div class="rt-right"><div class="rh">'+r[0]+' · 共 '+tot+' 条 · '+users+' 人</div><div class="bars">'+bars+'</div></div>';
-  var svg=el.querySelector('svg');
   function pick(i){i=+i;if(i===sel||i<0||i>=n)return;sel=i;draw();}
   el.querySelectorAll('.barhit,.barh').forEach(function(rc){
    rc.addEventListener('click',function(){pick(rc.dataset.i);});
-  });
-  svg.addEventListener('mousemove',function(e){
-   var rect=svg.getBoundingClientRect();
-   var x=(e.clientX-rect.left)/rect.width*W;
-   var i=Math.max(0,Math.min(n-1,Math.floor((x-pl)/gap)));
-   if(x>=pl&&x<=W-pr) pick(i);
   });
  }
  draw();

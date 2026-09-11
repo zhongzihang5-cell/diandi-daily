@@ -101,8 +101,9 @@ details.uid .us{margin-left:auto;font-size:11px;color:var(--mute);font-weight:60
 .archday .latest{font-size:10px;font-weight:800;color:#fff;background:var(--rose);padding:1px 7px;border-radius:20px}
 .archday .asum{font-size:12px;color:var(--ink2);font-weight:600;margin-left:auto}
 .archday .agrid{padding:2px 14px 14px}
-.rt{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:center}@media(max-width:780px){.rt{grid-template-columns:1fr}}
-.rt-right .rh{font-size:12.5px;font-weight:800;color:var(--ink2);margin-bottom:9px}.rt rect.barh{cursor:pointer;transition:opacity .12s}
+.rt{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}@media(max-width:780px){.rt{grid-template-columns:1fr}}
+.rt-left{min-width:0}.rt-hint{font-size:11px;color:var(--mute);margin-top:4px;font-weight:600}
+.rt-right .rh{font-size:12.5px;font-weight:800;color:var(--ink2);margin-bottom:9px}.rt rect.barh,.rt rect.barhit{cursor:pointer}.rt rect.barh{transition:fill .12s}
 .rt-right .bar{grid-template-columns:56px 1fr 62px}
 .panel-day{display:none;padding:22px 0 70px}.panel-day.on{display:block}
 .datelist{display:flex;flex-direction:column;gap:10px}
@@ -1999,23 +2000,48 @@ var RT_825=[["8/19",1,0,0,0,1],["8/20",1,9,6,1,15],["8/21",5,41,30,2,69],["8/22"
 function initRectype(elid,RT){
  var el=document.getElementById(elid);if(!el||!RT||!RT.length)return;
  var cats=['文本','快捷','语音','饮食'],idx=[2,3,1,4],cols=['#ef2f6b','#3b6fe0','#8656e6','#e0891f'];
- var W=340,H=170,pl=8,pr=8,pt=16,pb=24,n=RT.length,sel=n-1;
+ var W=340,H=178,pl=10,pr=10,pt=22,pb=28,n=RT.length,sel=n-1;
  var maxt=Math.max.apply(null,RT.map(function(r){return r[1]+r[2]+r[3]+r[4];}))||1;
- var gap=(W-pl-pr)/n,bw=gap*0.56;
+ var gap=(W-pl-pr)/n,bw=Math.max(gap*0.58,3);
+ function showX(j){
+  if(j===sel||j===0||j===n-1)return true;
+  // 稀疏刻度：约每 5 天一个，避开与首尾/选中过近
+  if(n>12&&j%5===0&&Math.abs(j-sel)>1&&j>1&&j<n-2)return true;
+  return false;
+ }
  function draw(){
   var g='';
   RT.forEach(function(r,j){
    var tot=r[1]+r[2]+r[3]+r[4];var x=pl+gap*j+(gap-bw)/2;var hh=tot/maxt*(H-pt-pb);var y=H-pb-hh;
+   var cx=(x+bw/2);
+   // 整列热区，便于点选
+   g+='<rect class="barhit" data-i="'+j+'" x="'+(pl+gap*j).toFixed(1)+'" y="0" width="'+gap.toFixed(1)+'" height="'+H+'" fill="transparent"/>';
    g+='<rect class="barh" data-i="'+j+'" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(hh,1).toFixed(1)+'" rx="3" fill="'+(j===sel?'#ef2f6b':'#f0b9cd')+'"/>';
-   g+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y-4).toFixed(1)+'" font-size="9.5" fill="#9a9bab" text-anchor="middle">'+tot+'</text>';
-   g+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-8)+'" font-size="9.5" fill="'+(j===sel?'#b5124a':'#9a9bab')+'" text-anchor="middle" font-weight="'+(j===sel?'800':'400')+'">'+r[0]+'</text>';
+   if(j===sel){
+    g+='<text x="'+cx.toFixed(1)+'" y="'+(y-5).toFixed(1)+'" font-size="11" fill="#b5124a" text-anchor="middle" font-weight="800">'+tot+'</text>';
+   }
+   if(showX(j)){
+    var anchor=j===0?'start':(j===n-1?'end':'middle');
+    var tx=j===0?(pl+gap*j): (j===n-1?(W-pr):(cx));
+    g+='<text x="'+tx.toFixed(1)+'" y="'+(H-8)+'" font-size="10" fill="'+(j===sel?'#b5124a':'#9a9bab')+'" text-anchor="'+anchor+'" font-weight="'+(j===sel?'800':'600')+'">'+r[0]+'</text>';
+   }
   });
   var r=RT[sel],tot=r[1]+r[2]+r[3]+r[4],users=r[5]||tot;
   var bars=cats.map(function(c,k){var v=r[idx[k]];var pct=users?(v/users*100):0;
     return '<div class="bar"><span class="lb">'+c+'</span><span class="track"><span class="fill" style="width:'+(users?v/users*100:0)+'%;background:'+cols[k]+'"></span></span><span class="vv">'+pct.toFixed(2)+'%</span></div>';}).join('');
-  el.innerHTML='<div class="rt-left"><svg class="chart" viewBox="0 0 '+W+' '+H+'">'+g+'</svg></div>'+
-   '<div class="rt-right"><div class="rh">'+r[0]+' · 共 '+tot+' 条</div><div class="bars">'+bars+'</div></div>';
-  el.querySelectorAll('rect.barh').forEach(function(rc){rc.addEventListener('click',function(){sel=+rc.dataset.i;draw();});});
+  el.innerHTML='<div class="rt-left"><svg class="chart" viewBox="0 0 '+W+' '+H+'">'+g+'</svg><div class="rt-hint">点选柱体查看当日构成</div></div>'+
+   '<div class="rt-right"><div class="rh">'+r[0]+' · 共 '+tot+' 条 · '+users+' 人</div><div class="bars">'+bars+'</div></div>';
+  var svg=el.querySelector('svg');
+  function pick(i){i=+i;if(i===sel||i<0||i>=n)return;sel=i;draw();}
+  el.querySelectorAll('.barhit,.barh').forEach(function(rc){
+   rc.addEventListener('click',function(){pick(rc.dataset.i);});
+  });
+  svg.addEventListener('mousemove',function(e){
+   var rect=svg.getBoundingClientRect();
+   var x=(e.clientX-rect.left)/rect.width*W;
+   var i=Math.max(0,Math.min(n-1,Math.floor((x-pl)/gap)));
+   if(x>=pl&&x<=W-pr) pick(i);
+  });
  }
  draw();
 }

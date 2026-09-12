@@ -3,7 +3,9 @@
 <meta name="description" content="美柚 · 点滴 9.11 灰度日报">
 <meta property="og:title" content="点滴 9.11 日报">
 <meta property="og:description" content="美柚 · 点滴 9.11 灰度日报">
+<meta property="og:url" content="https://zhongzihang5-cell.github.io/diandi-daily/?v=911">
 <meta property="og:type" content="website">
+<link rel="canonical" href="https://zhongzihang5-cell.github.io/diandi-daily/?v=911">
 <style>
 :root{--ink:#1b1c2e;--ink2:#3a3b52;--mute:#7a7b8e;--line:#ece9f1;--paper:#faf9fc;--card:#fff;
 --rose:#ef2f6b;--rose-soft:#fde5ee;--rose-ink:#b5124a;--blue:#3b6fe0;--amber:#e0891f;--violet:#8656e6;
@@ -2177,7 +2179,7 @@ var DAYS=[{"sfx": "911"}, {"sfx": "910"}, {"sfx": "909"}, {"sfx": "908"}, {"sfx"
 var DATE_LABELS={"911":"9.11","910":"9.10","909":"9.9","908":"9.8","907":"9.7","906":"9.6","903":"9.3","902":"9.2","901":"9.1","831":"8.31","830":"8.30","827":"8.27","826":"8.26","825":"8.25","905":"9.5","904":"9.4","829":"8.29","828":"8.28"};
 DAYS.forEach(function(x){fill('charts0_'+x.sfx,window['CH0_'+x.sfx]);fill('charts1_'+x.sfx,window['CH1_'+x.sfx]);fill('charts2_'+x.sfx,window['CH2_'+x.sfx]);if(window['RC_'+x.sfx])fill('retention_compare_'+x.sfx,window['RC_'+x.sfx]);initRectype('rectype_'+x.sfx,window['RT_'+x.sfx]);});
 var activeSfx=DAYS[0].sfx;
-function setReportTitle(sfx){var label=DATE_LABELS[sfx]||DATE_LABELS[(DAYS[0]||{}).sfx]||'9.11';var title='点滴 '+label+' 日报';document.title=title;var h1=document.querySelector('.tophead h1');if(h1)h1.textContent=title;var og=document.querySelector('meta[property="og:title"]');if(og)og.setAttribute('content',title);}
+function setReportTitle(sfx){var label=DATE_LABELS[sfx]||DATE_LABELS[(DAYS[0]||{}).sfx]||'9.11';var title='点滴 '+label+' 日报';document.title=title;var h1=document.querySelector('.tophead h1');if(h1)h1.textContent=title;var og=document.querySelector('meta[property="og:title"]');if(og)og.setAttribute('content',title);var v=sfx||'911';try{var u=new URL(location.href);if(u.searchParams.get('v')!==v){u.searchParams.set('v',v);history.replaceState(null,'',u.pathname+u.search+u.hash);}var ou=document.querySelector('meta[property="og:url"]');if(ou)ou.setAttribute('content',u.origin+u.pathname+'?v='+v);}catch(e){}}
 function showRep(){document.querySelectorAll('.dayreport').forEach(function(r){r.style.display=r.dataset.sfx===activeSfx?'':'none';});}
 function activateTab(t){
  document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on',x.dataset.t===t);});
